@@ -6,14 +6,13 @@
           <a class="nav-item">MyCompany</a>
         </div>
 
-        <span class="nav-toggle">
+        <span class="nav-toggle" v-on:click="toggleNav" v-bind:class="{ 'is-active': isActive }">
           <span></span>
           <span></span>
           <span></span>
         </span>
 
-        <div class="nav-right nav-menu">
-
+        <div class="nav-right nav-menu" v-bind:class="{ 'is-active': isActive }">
           <router-link to="/" class="nav-item r-item">Home</router-link>
           <router-link to="faq" class="nav-item r-item">Features</router-link>
           <router-link to="faq" class="nav-item r-item">About</router-link>
@@ -31,7 +30,6 @@
           </div>
 
         </div>
-        <div class="clear"></div>
       </div>
     </div>
 
@@ -52,44 +50,52 @@
     </footer>
   </div>
 </template>
-
 <script>
 export default {
-  name: 'App'
+  name: 'app',
+  data: function() {
+    return {
+      isActive: false
+    }
+  },
+  methods: {
+    toggleNav: function() {
+      this.isActive = !this.isActive;
+    }
+  }
 }
 </script>
 
 <style lang="sass">
-
 @import '../node_modules/bulma/bulma.sass'
 @import 'mediaquery'
 
 .nav
   background-color: #383838
   a:hover
-    color:#fff
+    color: gray
 
-.nav-left a
-  font-weight: bold
+.nav-left a 
   color: #fff
+  font-weight: bold
 
 a.r-item
-  color: #c1c1c1
+  color:#C1C1C1
   padding: 0.5rem 1.75rem
   +mobile
-    color: #FFF
+    color: gray
     &:hover
-      background-color: #F00
+      background-color: #F1F1F1
 
-.nav-left,.nav-right
-  float: left
+.nav-toggle span
+  background-color: #C1C1C1
 
-.nav-right.nav-menu .nav-item
-  float: left
+footer
+  background-color: $primary !important
+  color: #fff
 
-.clear
-  clear: both !important
+  .icon
+    color: #fff
+    margin-left: 20px
 
-.nav.has-shadow
-  padding: 10px
 </style>
